@@ -3,25 +3,371 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CEJAI — Sistema de gestión escolar</title>
+<title>CEJAI — Centro Educativo Juego y Aprendo en Inglés</title>
+<meta name="description" content="Centro Educativo Juego y Aprendo en Inglés (CEJAI): educación bilingüe para niñas y niños de 1 a 6 años, con grupos de máximo 12 alumnos por aula.">
+<link rel="icon" href="logo-cejai.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.6;color:#222}
-  h1{margin-bottom:4px} .sub{color:#666;margin-top:0} a{color:#1a5fb4}
+  :root{
+    --azul:#1d5fa6; --azul-cielo:#267aaa; --azul-noche:#0e2f5c;
+    --amarillo:#fcd93a; --amarillo-claro:#fff6cc;
+    --naranja:#f08a3c; --verde:#5fae4a; --rojo:#e5484d; --morado:#8e5bd6;
+    --texto:#1f2937; --tenue:#5b6474; --fondo:#fffdf7; --borde:#efe9da;
+    --radio:24px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--texto);background:var(--fondo);line-height:1.65}
+  h1,h2,h3{font-family:'Baloo 2','Poppins',sans-serif;line-height:1.1;color:var(--azul-noche);margin:0}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .contenedor{max-width:1160px;margin:0 auto;padding:0 24px}
+
+  /* ---------- Barra superior ---------- */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,253,247,.85);backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--borde)}
+  .barra{display:flex;align-items:center;justify-content:space-between;height:76px;gap:16px}
+  .marca{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .marca img{width:52px;height:52px;border-radius:50%}
+  .marca strong{font-family:'Baloo 2',sans-serif;font-size:1.45rem;color:var(--azul);letter-spacing:.5px;line-height:1}
+  .marca small{display:block;font-size:.72rem;color:var(--tenue);font-weight:500}
+  nav.menu{display:flex;align-items:center;gap:26px}
+  nav.menu a{text-decoration:none;font-weight:500;font-size:.94rem;color:var(--texto)}
+  nav.menu a:hover{color:var(--azul)}
+  .boton{display:inline-flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;border-radius:999px;padding:13px 26px;border:0;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+  .boton:hover{transform:translateY(-2px)}
+  .b-azul{background:var(--azul);color:#fff!important;box-shadow:0 10px 24px rgba(29,95,166,.28)}
+  .b-amarillo{background:var(--amarillo);color:var(--azul-noche)!important;box-shadow:0 10px 24px rgba(252,217,58,.4)}
+  .b-blanco{background:#fff;color:var(--azul)!important;border:2px solid var(--borde)}
+  .barra .boton{padding:10px 20px;font-size:.9rem}
+
+  /* ---------- Portada ---------- */
+  .portada{position:relative;overflow:hidden;padding:64px 0 90px;background:
+    radial-gradient(600px 380px at 92% 8%,rgba(252,217,58,.35),transparent 65%),
+    radial-gradient(520px 360px at 0% 90%,rgba(38,122,170,.16),transparent 65%)}
+  .portada .contenedor{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+  .chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--borde);padding:7px 16px;border-radius:999px;font-size:.85rem;font-weight:600;color:var(--azul)}
+  .chip .banderas{font-size:1rem}
+  h1{font-size:clamp(2.6rem,5.4vw,4.4rem);margin:20px 0 18px;font-weight:800}
+  h1 .c1{color:var(--rojo)} h1 .c2{color:var(--naranja)} h1 .c3{color:var(--verde)} h1 .c4{color:var(--azul)}
+  .lema{font-size:1.15rem;color:var(--tenue);margin:0 0 30px;max-width:520px}
+  .lema b{color:var(--azul-noche)}
+  .acciones{display:flex;flex-wrap:wrap;gap:14px}
+  .ilustracion{position:relative}
+  .ilustracion .marco{border-radius:32px;overflow:hidden;box-shadow:0 30px 60px rgba(14,47,92,.18);border:8px solid #fff;transform:rotate(1.5deg);background:#cfe9f7}
+  .ilustracion .marco img{width:100%;height:auto}
+  .burbuja{position:absolute;background:#fff;border-radius:18px;padding:12px 16px;box-shadow:0 14px 30px rgba(14,47,92,.15);font-weight:600;font-size:.9rem;display:flex;align-items:center;gap:10px}
+  .burbuja i{font-style:normal;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:1.1rem}
+  .burbuja.b1{left:-22px;bottom:28px} .burbuja.b1 i{background:var(--amarillo-claro)}
+  .burbuja.b2{right:-14px;top:-18px} .burbuja.b2 i{background:#e3f4dc}
+  .estrella{position:absolute;color:var(--amarillo);animation:flotar 6s ease-in-out infinite}
+  @keyframes flotar{50%{transform:translateY(-12px) rotate(12deg)}}
+
+  /* ---------- Cifras ---------- */
+  .cifras{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:-30px;position:relative;z-index:2}
+  .cifra{background:#fff;border-radius:var(--radio);padding:24px;border:1px solid var(--borde);box-shadow:0 12px 30px rgba(14,47,92,.06)}
+  .cifra strong{font-family:'Baloo 2',sans-serif;font-size:2.1rem;line-height:1;display:block}
+  .cifra span{color:var(--tenue);font-size:.92rem}
+  .cifra:nth-child(1) strong{color:var(--rojo)} .cifra:nth-child(2) strong{color:var(--naranja)}
+  .cifra:nth-child(3) strong{color:var(--verde)} .cifra:nth-child(4) strong{color:var(--azul)}
+
+  /* ---------- Secciones ---------- */
+  section.bloque{padding:100px 0}
+  .encabezado{max-width:660px;margin-bottom:46px}
+  .encabezado.centro{text-align:center;margin-left:auto;margin-right:auto}
+  .encabezado small{display:inline-block;font-weight:700;font-size:.8rem;letter-spacing:1.6px;text-transform:uppercase;color:var(--naranja);margin-bottom:8px}
+  h2{font-size:clamp(2rem,3.6vw,2.9rem);font-weight:800;margin-bottom:12px}
+  .encabezado p{color:var(--tenue);margin:0;font-size:1.05rem}
+
+  /* Proyecto */
+  .proyecto{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .fotos-proyecto{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .fotos-proyecto img{border-radius:var(--radio);width:100%;height:100%;object-fit:cover;aspect-ratio:3/4}
+  .fotos-proyecto img:nth-child(2){margin-top:48px}
+  .pilares{display:grid;gap:16px;margin-top:28px}
+  .pilar{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--borde);border-radius:18px;padding:18px}
+  .pilar .ico{flex:0 0 46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:1.3rem}
+  .pilar h3{font-size:1.2rem;margin-bottom:2px}
+  .pilar p{margin:0;color:var(--tenue);font-size:.94rem}
+  .cita{margin-top:26px;font-family:'Baloo 2',sans-serif;font-size:1.35rem;font-weight:700;color:var(--azul);border-left:5px solid var(--amarillo);padding-left:16px}
+
+  /* Niveles y horarios */
+  .fondo-azul{background:linear-gradient(160deg,var(--azul) 0%,var(--azul-noche) 100%);color:#fff;position:relative;overflow:hidden}
+  .fondo-azul h2,.fondo-azul h3{color:#fff}
+  .fondo-azul .encabezado p{color:rgba(255,255,255,.78)}
+  .fondo-azul .encabezado small{color:var(--amarillo)}
+  .niveles{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .nivel{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:var(--radio);padding:26px;transition:transform .2s ease,background .2s ease}
+  .nivel:hover{transform:translateY(-4px);background:rgba(255,255,255,.13)}
+  .nivel .edad{display:inline-block;font-weight:700;font-size:.82rem;border-radius:999px;padding:4px 12px;margin-bottom:14px;color:var(--azul-noche)}
+  .nivel h3{font-size:1.6rem;margin-bottom:6px}
+  .nivel p{margin:0;color:rgba(255,255,255,.75);font-size:.92rem}
+  .horarios{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+  .horario{background:#fff;color:var(--texto);border-radius:var(--radio);padding:24px 28px;display:flex;align-items:center;gap:18px}
+  .horario .reloj{flex:0 0 54px;height:54px;border-radius:16px;background:var(--amarillo-claro);display:grid;place-items:center;font-size:1.5rem}
+  .horario h3{color:var(--azul-noche);font-size:1.35rem}
+  .horario p{margin:0;color:var(--tenue);font-weight:500}
+
+  /* Instalaciones */
+  .galeria{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:16px}
+  .galeria figure{margin:0;position:relative;border-radius:20px;overflow:hidden;background:#e9eef5}
+  .galeria figure.grande{grid-column:span 2;grid-row:span 2}
+  .galeria img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .galeria figure:hover img{transform:scale(1.06)}
+  .galeria figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:600;color:var(--azul-noche)}
+
+  /* Actividades */
+  .actividades{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .actividad{background:#fff;border:1px solid var(--borde);border-radius:var(--radio);padding:30px;position:relative;overflow:hidden}
+  .actividad::before{content:"";position:absolute;right:-40px;top:-40px;width:120px;height:120px;border-radius:50%;opacity:.18}
+  .actividad:nth-child(1)::before{background:var(--naranja)} .actividad:nth-child(2)::before{background:var(--verde)} .actividad:nth-child(3)::before{background:var(--morado)}
+  .actividad .emoji{font-size:2rem;margin-bottom:12px}
+  .actividad h3{font-size:1.45rem;margin-bottom:8px}
+  .actividad p{margin:0;color:var(--tenue);font-size:.95rem}
+
+  /* Inscripciones */
+  .inscripciones{background:linear-gradient(115deg,var(--amarillo) 0%,#ffe680 45%,#ffc36b 100%);border-radius:36px;padding:60px;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center;position:relative;overflow:hidden}
+  .inscripciones h2{margin-bottom:10px}
+  .inscripciones p{margin:0 0 6px;color:#5a4500;font-size:1.05rem}
+  .inscripciones .lado{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+  .inscripciones .mes{font-family:'Baloo 2',sans-serif;font-size:3.6rem;font-weight:800;color:var(--azul-noche);line-height:1}
+
+  /* Portal del personal */
+  .portal{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;background:#fff;border:1px solid var(--borde);border-radius:var(--radio);padding:30px 34px}
+  .portal .ico{width:64px;height:64px;border-radius:18px;background:var(--azul);color:var(--amarillo);display:grid;place-items:center;font-size:1.8rem}
+  .portal h3{font-size:1.5rem;margin-bottom:4px}
+  .portal p{margin:0;color:var(--tenue);font-size:.95rem}
+  .portal p a{color:var(--azul)}
+
+  footer{background:var(--azul-noche);color:rgba(255,255,255,.72);padding:48px 0;margin-top:100px;font-size:.92rem}
+  footer .contenedor{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  footer .marca strong{color:#fff} footer .marca small{color:rgba(255,255,255,.6)}
+  footer nav{display:flex;gap:22px;flex-wrap:wrap}
+  footer a{text-decoration:none} footer a:hover{color:#fff}
+
+  /* Aparición al hacer scroll */
+  .aparecer{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .aparecer.visible{opacity:1;transform:none}
+
+  @media (max-width:980px){
+    nav.menu a:not(.boton){display:none}
+    .portada .contenedor,.proyecto,.inscripciones{grid-template-columns:1fr}
+    .portada{text-align:center;padding-top:40px}
+    .lema{margin-left:auto;margin-right:auto}
+    .acciones{justify-content:center}
+    .cifras{grid-template-columns:repeat(2,1fr);margin-top:0}
+    .niveles{grid-template-columns:repeat(2,1fr)}
+    .horarios,.actividades{grid-template-columns:1fr}
+    .galeria{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}
+    .portal{grid-template-columns:1fr;text-align:left}
+    .inscripciones{padding:36px}
+    .burbuja.b1{left:6px} .burbuja.b2{right:6px}
+  }
+  @media (max-width:560px){
+    .niveles{grid-template-columns:1fr}
+    .marca small{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .aparecer{opacity:1;transform:none}
+  }
 </style>
 </head>
 <body>
-<h1>CEJAI</h1>
-<p class="sub">Sistema de gestión administrativa del Centro Educativo CEJAI</p>
-<p>CEJAI es una aplicación interna del Centro Educativo CEJAI. La usa el personal administrativo
-del centro para llevar el registro de alumnos y familias, servicios, facturación, cobros,
-recibos y comunicaciones con los padres.</p>
-<p>La aplicación funciona sobre Google Apps Script. Sus datos se guardan en la cuenta de Google
-del propio centro.</p>
-<p>No es una aplicación pública: solo pueden usarla las personas autorizadas por la administración del centro.</p>
-<p><a href="app" style="display:inline-block;background:#163c7a;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none">Entrar al sistema</a></p>
-<ul>
-  <li><a href="privacidad.html">Política de privacidad</a></li>
-  <li><a href="terminos.html">Condiciones del servicio</a></li>
-</ul>
+
+<header>
+  <div class="contenedor barra">
+    <a class="marca" href="./">
+      <img src="logo-cejai.jpg" alt="">
+      <span><strong>CEJAI</strong><small>Juego y Aprendo en Inglés</small></span>
+    </a>
+    <nav class="menu" aria-label="Principal">
+      <a href="#proyecto">Proyecto</a>
+      <a href="#niveles">Niveles y horarios</a>
+      <a href="#instalaciones">Instalaciones</a>
+      <a href="#actividades">Actividades</a>
+      <a href="#inscripciones">Inscripciones</a>
+      <a class="boton b-azul" href="app">Acceso personal</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Portada -->
+  <section class="portada">
+    <svg class="estrella" style="left:6%;top:14%;width:34px" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.6 7 .7-5.3 4.7 1.6 7L12 17.3 5.7 21l1.6-7L2 9.3l7-.7z"/></svg>
+    <svg class="estrella" style="right:4%;bottom:12%;width:24px;animation-delay:-3s;color:var(--naranja)" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.6 7 .7-5.3 4.7 1.6 7L12 17.3 5.7 21l1.6-7L2 9.3l7-.7z"/></svg>
+    <div class="contenedor">
+      <div>
+        <span class="chip"><span class="banderas" aria-hidden="true">🇩🇴 🇺🇸</span> Educación bilingüe de 1 a 6 años</span>
+        <h1><span class="c1">Juego</span> y <span class="c2">aprendo</span><br>en <span class="c4">inglés</span></h1>
+        <p class="lema">No les enseñamos, <b>solo los dirigimos</b>. Ellas y ellos aprenden… <b>jugando</b>.</p>
+        <div class="acciones">
+          <a class="boton b-amarillo" href="#inscripciones">Inscripciones</a>
+          <a class="boton b-blanco" href="#proyecto">Conoce el proyecto</a>
+        </div>
+      </div>
+      <div class="ilustracion">
+        <div class="marco"><img src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/portada1.png?w=1100" alt="Ilustración de niños jugando con las banderas de República Dominicana y Estados Unidos"></div>
+        <div class="burbuja b1"><i aria-hidden="true">👩‍🏫</i> Máximo 12 alumnos por aula</div>
+        <div class="burbuja b2"><i aria-hidden="true">🗣️</i> Inglés desde el primer día</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="contenedor cifras">
+    <div class="cifra aparecer"><strong>12</strong><span>alumnos como máximo por teacher</span></div>
+    <div class="cifra aparecer"><strong>1 año</strong><span>edad en que empieza la estimulación temprana</span></div>
+    <div class="cifra aparecer"><strong>2</strong><span>líneas por grado</span></div>
+    <div class="cifra aparecer"><strong>2</strong><span>horarios: matutino o corrido</span></div>
+  </div>
+
+  <!-- Proyecto educativo -->
+  <section class="bloque" id="proyecto">
+    <div class="contenedor proyecto">
+      <div class="fotos-proyecto aparecer">
+        <img src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/dsc00107.jpg?w=600" alt="Aula del centro">
+        <img src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/dsc00095.jpg?w=600" alt="Área de computación">
+      </div>
+      <div class="aparecer">
+        <div class="encabezado" style="margin-bottom:0">
+          <small>Proyecto educativo</small>
+          <h2>Aprender jugando, a su ritmo</h2>
+          <p>Grupos reducidos y enseñanza individualizada. Con imágenes y sonidos seleccionados despertamos la curiosidad, en sesiones breves pensadas para cada edad.</p>
+        </div>
+        <div class="pilares">
+          <div class="pilar"><div class="ico" style="background:#fde3e4">🧠</div><div><h3>Estimulación temprana</h3><p>Desde el año de edad: memoria visual y auditiva, ubicación en el espacio y dominio del cuerpo.</p></div></div>
+          <div class="pilar"><div class="ico" style="background:#e3f4dc">🌎</div><div><h3>Inmersión real en inglés</h3><p>Desde el inicio, para que a los 6 años lean y hablen en inglés sin dejar de lado el español.</p></div></div>
+          <div class="pilar"><div class="ico" style="background:var(--amarillo-claro)">⭐</div><div><h3>Atención personalizada</h3><p>No más de 12 alumnos por teacher, con planificación para cada grupo.</p></div></div>
+        </div>
+        <p class="cita">“No les enseñamos, solo los dirigimos. Ellos aprenden.”</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Niveles y horarios -->
+  <section class="bloque fondo-azul" id="niveles">
+    <div class="contenedor">
+      <div class="encabezado">
+        <small>Niveles y horarios</small>
+        <h2>Un lugar para cada etapa</h2>
+        <p>Dos líneas por grado, con un máximo de 12 alumnos por aula, y dos horarios para adaptarnos a cada familia.</p>
+      </div>
+      <div class="niveles">
+        <div class="nivel aparecer"><span class="edad" style="background:#ffb4b6">1 y 2 años</span><h3>Maternal</h3><p>Primeros juegos, sonidos y palabras.</p></div>
+        <div class="nivel aparecer"><span class="edad" style="background:#ffd0a8">3 a 4 años</span><h3>Pre-Kinder</h3><p>Curiosidad, movimiento y primeras rutinas.</p></div>
+        <div class="nivel aparecer"><span class="edad" style="background:#c9ecb9">4 a 5 años</span><h3>Kinder</h3><p>Más vocabulario y lenguaje oral en inglés.</p></div>
+        <div class="nivel aparecer"><span class="edad" style="background:var(--amarillo)">5 a 6 años</span><h3>Pre-First</h3><p>Lectura y conversación en inglés y español.</p></div>
+      </div>
+      <div class="horarios">
+        <div class="horario aparecer"><div class="reloj" aria-hidden="true">🌤️</div><div><h3>Matutino</h3><p>7:30 a.m. – 12:30 p.m.</p></div></div>
+        <div class="horario aparecer"><div class="reloj" aria-hidden="true">🌇</div><div><h3>Corrido</h3><p>7:30 a.m. – 5:00 p.m.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instalaciones -->
+  <section class="bloque" id="instalaciones">
+    <div class="contenedor">
+      <div class="encabezado centro">
+        <small>Instalaciones</small>
+        <h2>Espacios cómodos y seguros</h2>
+        <p>Nuestras instalaciones se mantienen en constante mejora para la comodidad y seguridad de sus hijos.</p>
+      </div>
+      <div class="galeria">
+        <figure class="grande aparecer"><img loading="lazy" src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/dsc00103.jpg?w=900" alt="Fachada del centro"><figcaption>El centro</figcaption></figure>
+        <figure class="aparecer"><img loading="lazy" src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/dsc00087.jpg?w=500" alt="Recepción"><figcaption>Recepción</figcaption></figure>
+        <figure class="aparecer"><img loading="lazy" src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/dsc00051.jpg?w=500" alt="Área de recreo"><figcaption>Área de recreo</figcaption></figure>
+        <figure class="aparecer"><img loading="lazy" src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/dsc00172.jpg?w=500" alt="Área de merienda"><figcaption>Área de merienda</figcaption></figure>
+        <figure class="aparecer"><img loading="lazy" src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/dsc00098.jpg?w=500" alt="Área de estimulación psicomotriz"><figcaption>Psicomotricidad</figcaption></figure>
+        <figure class="aparecer"><img loading="lazy" src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/dsc00095.jpg?w=500" alt="Área de computación"><figcaption>Computación</figcaption></figure>
+        <figure class="aparecer"><img loading="lazy" src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/dsc00063.jpg?w=500" alt="Biblioteca"><figcaption>Biblioteca</figcaption></figure>
+        <figure class="grande aparecer"><img loading="lazy" src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/dsc00173.jpg?w=900" alt="Salón con mesas y sillas de colores"><figcaption>Salón multiuso</figcaption></figure>
+        <figure class="aparecer"><img loading="lazy" src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/dsc00107.jpg?w=500" alt="Aulas"><figcaption>Aulas</figcaption></figure>
+        <figure class="aparecer"><img loading="lazy" src="https://centroeducativojai.wordpress.com/wp-content/uploads/2017/02/dsc00111.jpg?w=500" alt="Salón de clases con estantes de libros"><figcaption>Salón de clases</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Actividades -->
+  <section class="bloque" id="actividades" style="padding-top:0">
+    <div class="contenedor">
+      <div class="encabezado">
+        <small>Otras actividades</small>
+        <h2>Más allá del aula</h2>
+      </div>
+      <div class="actividades">
+        <div class="actividad aparecer"><div class="emoji" aria-hidden="true">📚</div><h3>Tutorías personalizadas</h3><p>Acompañamiento individual para que cada niño avance a su propio ritmo.</p></div>
+        <div class="actividad aparecer"><div class="emoji" aria-hidden="true">✏️</div><h3>Salas de tareas</h3><p>Un espacio tranquilo y guiado para hacer las tareas en el centro.</p></div>
+        <div class="actividad aparecer"><div class="emoji" aria-hidden="true">☀️</div><h3>Campamento de verano</h3><p>En julio: arte con un artista plástico, inglés más conversacional, cocina, piscinita y psicomotricidad.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inscripciones -->
+  <section id="inscripciones">
+    <div class="contenedor">
+      <div class="inscripciones aparecer">
+        <div>
+          <h2>Inscripciones</h2>
+          <p>Las inscripciones se abren cada año en febrero.</p>
+          <p>Le invitamos a visitar el colegio para conocer las condiciones y los precios.</p>
+        </div>
+        <div class="lado">
+          <span class="mes">Febrero</span>
+          <a class="boton b-azul" href="#instalaciones">Ver el colegio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portal del personal (sistema CEJAI) -->
+  <section class="bloque" id="sistema" style="padding-bottom:0">
+    <div class="contenedor">
+      <div class="portal aparecer">
+        <div class="ico" aria-hidden="true">🔐</div>
+        <div>
+          <h3>Sistema administrativo CEJAI</h3>
+          <p>Uso interno del personal del centro: alumnos y familias, facturación, cobros, recibos y avisos a los padres. Los datos se guardan en la cuenta de Google del propio centro. <a href="privacidad.html">Privacidad</a> · <a href="terminos.html">Términos</a></p>
+        </div>
+        <a class="boton b-azul" href="app">Entrar al sistema</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="contenedor">
+    <a class="marca" href="./">
+      <img src="logo-cejai.jpg" alt="">
+      <span><strong>CEJAI</strong><small>Centro Educativo Juego y Aprendo en Inglés</small></span>
+    </a>
+    <nav aria-label="Pie de página">
+      <a href="#proyecto">Proyecto</a>
+      <a href="#niveles">Niveles</a>
+      <a href="#instalaciones">Instalaciones</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="terminos.html">Términos</a>
+      <a href="app">Acceso personal</a>
+    </nav>
+    <span>© <span id="anio">2026</span> CEJAI</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('anio').textContent = new Date().getFullYear();
+  // Las tarjetas aparecen suavemente al llegar a ellas.
+  if ('IntersectionObserver' in window) {
+    const observador = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observador.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.aparecer').forEach(function (el) { observador.observe(el); });
+  } else {
+    document.querySelectorAll('.aparecer').forEach(function (el) { el.classList.add('visible'); });
+  }
+</script>
 </body>
 </html>
